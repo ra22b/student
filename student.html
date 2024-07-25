@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const students = [];  // مصفوفة لتخزين الطلاب
+
+        // دالة لإضافة الطلاب
+        function addStudent(students, id, name, status) {
+            try {
+                //"مسجل سابقا او لاء" تحقق مما إذا كان الطالب موجودًا بالفعل
+                if (students.some(student => student.id === id)) {
+                    document.write("الطالب مسجل بالفعل<br>");
+                } else {
+                    students.push({ id, name, status });
+                    document.write("تم اضافة الطالب بنجاح<br>");
+                }
+            } catch (error) {
+                document.write("لم يتم اضافة الطالب<br>");
+            }
+        }
+
+        // إضافة طلاب
+        addStudent(students, 1, 'احمد', "مسجل");
+        addStudent(students, 1, 'احمد', "مسجل");
+        addStudent(students, 2, 'جود', "غير مسجل "); // يمكنك إضافة طلاب آخرين هنا إذا لزم الأمر
+
+
+
+        //************** طباعة الطلاب دالة 
+
+        document.write("<br> <hr> <br> ");
+
+        function printStudents(students) {
+            //التحقق من وجود طلاب 
+            try {
+                if (students.lenght == 0) {
+                    document.write("لا يوجد طلاب")
+                }
+                for (let student of students) {
+                    document.write( //// طباعة الكائن
+                        "Task ID: " + student.id + "  " +
+                        "Name Student: " + student.name + "  " +
+                        "Status: " + student.status + "  " +
+                        "<br>"
+                    );
+                }
+            }
+            catch (error) {
+                document.write(" هناك خطا<br>");
+            }
+
+        }
+        // استدعاء الدالة طباعة الطلاب 
+        printStudents(students)
+
+        document.write("<br> <hr> <br> ");
+
+        // دالة لازالة الطلاب من المصفةفة  
+        function removeStudent(students, id) {
+            try {
+                const ID = students.findIndex(student => student.id === id);
+                if (ID === -1) {
+                    document.write("الطالب غير موجود<br>");
+                } else {
+                    const removedStudent = students.splice(ID, 1)[0];
+                    document.write("تمت إزالة الطالب بنجاح<br>");
+                }
+            } catch (error) {
+                document.write("حدث خطأ أثناء محاولة إزالة الطالب<br>");
+            }
+        }
+
+
+        removeStudent(students, 1);
+        printStudents(students)
+
+
+
+    </script>
+</body>
+
+</html>
